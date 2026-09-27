@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIA GOLD CASINO | Experiencia Vegas VIP</title>
+    <style>
+        :root {
+            --bg-main: #07090e;
+            --bg-card: #111622;
+            --bg-input: #1a2133;
+            --accent-gold: #f1c40f;
+            --accent-gold-light: #fef08a;
+            --accent-gold-dark: #b7950b;
+            --accent-red: #ef4444;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --shadow-gold: 0 0 25px rgba(241, 196, 15, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cinzel', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 5%, rgba(241, 196, 15, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(139, 92, 246, 0.04) 0%, transparent 40%);
+        }
+
+        #toastContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            left: 20px;
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        @media (min-width: 600px) {
+            #toastContainer {
+                left: auto;
+                max-width: 400px;
+            }
+        }
+
+        .toast {
+            background: linear-gradient(135deg, #182033, #0f1420);
+            border-left: 4px solid var(--accent-gold);
+            color: var(--text-white);
+            padding: 14px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            font-size: 13px;
+            animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(241, 196, 15, 0.25);
+            backdrop-filter: blur(10px);
+            pointer-events: auto;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* MODALES RESPONSIVOS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(4, 6, 10, 0.88);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-card {
+            background: linear-gradient(145deg, #131a2b, #0e1320);
+            border: 2px solid rgba(241, 196, 15, 0.4);
+            padding: 25px 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), var(--shadow-gold);
+            text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: scaleUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @media (min-width: 600px) {
+            .modal-card { padding: 35px; }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-card h2 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-size: 20px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 15px rgba(241, 196, 15, 0.4);
+        }
+
+        @media (min-width: 600px) {
+            .modal-card h2 { font-size: 24px; letter-spacing: 2px; }
+        }
+
+        .modal-card input, .modal-card select {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            background-color: var(--bg-input);
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            border-radius: 10px;
+            color: var(--text-white);
+            outline: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .modal-card input:focus, .modal-card select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.35);
+            background-color: #212b42;
+        }
+
+        .modal-card button {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            color: var(--bg-main);
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 20px rgba(241, 196, 15, 0.3);
+            font-size: 14px;
+        }
+
+        .modal-card button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 196, 15, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .modal-card button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(1);
+        }
+
+        .auth-switch-text {
+            color: var(--text-gray);
+            font-size: 13px;
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .auth-switch-text:hover { color: var(--accent-gold); }
+
+        /* HEADER RESPONSIVO */
+        header {
+            background: rgba(17, 22, 34, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 12px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(241, 196, 15, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            header { padding: 18px 30px; gap: 0; }
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 2px 15px rgba(241, 196, 15, 0.5);
+        }
+
+        @media (min-width: 600px) {
+            .logo { font-size: 22px; letter-spacing: 2px; }
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        @media (min-width: 600px) {
+            .header-actions { width: auto; gap: 12px; }
+        }
+
+        .user-badge {
+            font-size: 12px;
+            background: var(--bg-input);
+            padding: 4px 10px;
+            border-radius: 25px;
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            color: var(--accent-gold-light);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 600px) {
+            .user-badge { padding: 6px 14px; font-size: 13px; }
+        }
+
+        .profile-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            object-fit: cover;
+        }
+
+        @media (min-width: 600px) {
+            .profile-avatar { width: 34px; height: 34px; }
+        }
+
+        .wallet-btn {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            border: none;
+            color: var(--bg-main);
+            padding: 8px 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 18px rgba(241,196,15,0.3);
+        }
+
+        @media (min-width: 600px) {
+            .wallet-btn { padding: 10px 20px; font-size: 14px; }
+        }
+
+        .settings-btn, .logout-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 8px 12px;
+            font-size: 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 600px) {
+            .settings-btn, .logout-btn { padding: 10px 16px; font-size: 13px; }
+        }
+
+        /* DRAWER DE BILLETERA RESPONSIVO */
+        .wallet-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(19, 26, 43, 0.98), rgba(11, 15, 25, 0.98));
+            border-left: 2px solid rgba(241, 196, 15, 0.4);
+            box-shadow: -20px 0 50px rgba(0,0,0,0.9);
+            z-index: 2500;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .wallet-drawer.open { right: 0; }
+
+        .wallet-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--bg-input);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wallet-header h3 { color: var(--accent-gold); font-size: 18px; }
+
+        .close-drawer {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .wallet-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .wallet-balance-box {
+            background: var(--bg-input);
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(241, 196, 15, 0.3);
+        }
+
+        .wallet-balance-box h4 { color: var(--text-gray); font-size: 12px; margin-bottom: 6px; }
+        .wallet-balance-box span { color: var(--accent-gold); font-size: 26px; font-weight: bold; }
+
+        .glass-panel {
+            background: rgba(17, 20, 31, 0.86);
+            border: 1px solid rgba(241, 196, 15, 0.22);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .topup-btn, .withdraw-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .topup-btn { background: linear-gradient(135deg, #22c55e, #15803d); color: white; }
+        .withdraw-btn { background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark)); color: var(--bg-main); }
+
+        /* PANEL ADMIN RESPONSIVO */
+        .admin-box {
+            background: rgba(22, 30, 48, 0.95);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .admin-box h4 {
+            color: var(--accent-gold);
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(241, 196, 15, 0.2);
+            padding-bottom: 6px;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        @media (min-width: 480px) {
+            .admin-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .admin-grid button {
+            padding: 10px;
+            font-size: 11px;
+            margin: 0;
+        }
+
+        /* CONTENEDOR PRINCIPAL Y BANNER */
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .container { padding: 30px 20px; }
+        }
+
+        .casino-banner {
+            background: linear-gradient(135deg, #161e31, #101624);
+            border: 1px solid rgba(241, 196, 15, 0.35);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .casino-banner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+                padding: 30px;
+                margin-bottom: 35px;
+            }
+        }
+
+        .banner-info h3 { color: var(--accent-gold); font-size: 18px; margin-bottom: 6px; }
+        @media (min-width: 600px) { .banner-info h3 { font-size: 22px; } }
+        .banner-info p { color: var(--text-gray); font-size: 13px; }
+
+        /* MALA DE JUEGOS RESPONSIVA */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+                gap: 22px;
+            }
+        }
+
+        .product-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--bg-input);
+            border-radius: 14px;
+            padding: 18px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(241, 196, 15, 0.2);
+            border-color: rgba(241, 196, 15, 0.5);
+        }
+
+        .product-card h3 { color: var(--accent-gold); font-size: 16px; margin-bottom: 8px; }
+        .product-card p { color: var(--text-gray); font-size: 12px; margin-bottom: 16px; }
+
+        .play-game-btn {
+            padding: 10px 16px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            color: var(--bg-main);
+            border: none;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .profile-info-row {
+            display: flex;
+            justify-content: space-between;
+            background: var(--bg-input);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .profile-info-row span:first-child { color: var(--text-gray); }
+        .profile-info-row span:last-child { color: var(--accent-gold-light); font-weight: bold; }
+
+        /* ESTILOS DE ARENA DE JUEGOS RESPONSIVOS */
+        .game-arena {
+            background: #0a0d14;
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slots-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        @media (min-width: 480px) {
+            .slots-box { gap: 15px; }
+        }
+
+        .slot-reel {
+            background: #151c2e;
+            border: 2px solid var(--accent-gold);
+            width: 65px;
+            height: 75px;
+            font-size: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+        }
+
+        @media (min-width: 480px) {
+            .slot-reel { width: 80px; height: 90px; font-size: 45px; }
+        }
+
+        .spinning { animation: slotSpin 0.15s linear infinite; }
+
+        @keyframes slotSpin {
+            0% { transform: translateY(-10px) scale(0.9); filter: blur(2px); }
+            50% { transform: translateY(10px) scale(1.1); filter: blur(4px); }
+            100% { transform: translateY(-10px) scale(0.9); filter: blur(2px); }
+        }
+
+        .roulette-wheel-box {
+            width: 100px;
+            height: 100px;
+            border: 5px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            font-weight: bold;
+            background: radial-gradient(circle, #1e293b, #0f172a);
+            box-shadow: 0 0 30px rgba(241,196,15,0.4);
+            transition: transform 2s cubic-bezier(0.1, 0.8, 0.1, 1);
+        }
+
+        @media (min-width: 480px) {
+            .roulette-wheel-box { width: 120px; height: 120px; font-size: 32px; border-width: 6px; }
+        }
+
+        .wheel-fast-spin { animation: spinWheel 0.2s linear infinite; }
+
+        @keyframes spinWheel {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .crash-value {
+            font-size: 40px;
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(241,196,15,0.6);
+        }
+
+        @media (min-width: 480px) { .crash-value { font-size: 50px; } }
+
+        .dice-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dice-roll { animation: diceShake 0.1s linear infinite; }
+
+        @keyframes diceShake {
+            0% { transform: rotate(-20deg) scale(0.9); }
+            50% { transform: rotate(20deg) scale(1.1); }
+            100% { transform: rotate(-20deg) scale(0.9); }
+        }
+
+        .card-hand {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card-item {
+            background: #ffffff;
+            color: #111;
+            width: 50px;
+            height: 70px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            border: 1px solid #ccc;
+        }
+
+        @media (min-width: 480px) {
+            .card-item { width: 60px; height: 85px; font-size: 26px; border-radius: 8px; }
+        }
+
+        .grid-5x5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .grid-cell {
+            background: var(--bg-input);
+            border: 1px solid rgba(241,196,15,0.3);
+            border-radius: 6px;
+            height: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            user-select: none;
+            transition: all 0.2s;
+        }
+
+        @media (min-width: 480px) {
+            .grid-cell { height: 48px; font-size: 16px; border-radius: 8px; }
+        }
+
+        .grid-cell:hover {
+            border-color: var(--accent-gold);
+            background: #25314d;
+        }
+
+        .grid-cell.revealed {
+            background: #1e293b;
+            border-color: var(--accent-gold);
+        }
+
+        .coin-flip-anim { animation: coinFlip 0.5s ease-in-out infinite; }
+
+        @keyframes coinFlip {
+            0% { transform: rotateY(0deg) scale(1); }
+            50% { transform: rotateY(180deg) scale(1.2); }
+            100% { transform: rotateY(360deg) scale(1); }
+        }
+
+        .chests-container {
+            display: flex;
+            gap: 15px;
+            font-size: 40px;
+        }
+
+        @media (min-width: 480px) { .chests-container { gap: 20px; font-size: 50px; } }
+
+        .chest-item { cursor: pointer; transition: transform 0.2s; }
+        .chest-item:hover { transform: scale(1.15); }
+    </style>
+</head>
+<body>
+
+    <div id="toastContainer"></div>
+
+    <!-- MODAL DE AUTENTICACIÓN (LOGIN / REGISTRO) -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-card">
+            <h2 id="authTitle">⚜️ INICIAR SESIÓN</h2>
+            
+            <form id="authForm" onsubmit="handleAuthSubmit(event)">
+                <div id="registerFields" style="display: none;">
+                    <input type="email" id="regEmail" placeholder="Correo Electrónico (Gmail)">
+                    <input type="text" id="regIdentity" placeholder="Número de Documento / Identidad">
+                </div>
+
+                <input type="text" id="authUsername" placeholder="Nombre de Usuario" required>
+                <input type="password" id="authPassword" placeholder="Contraseña" required>
+
+                <div id="registerConfirmPassword" style="display: none;">
+                    <input type="password" id="authConfirmPassword" placeholder="Verificar Contraseña">
+                </div>
+
+                <button type="submit" id="authSubmitBtn">INGRESAR</button>
+            </form>
+
+            <p class="auth-switch-text" id="authToggleBtn" onclick="toggleAuthMode()">¿No tienes cuenta? Regístrate aquí</p>
+        </div>
+    </div>
+
+    <!-- MODAL DE PERFIL DE USUARIO -->
+    <div id="profileModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <h2>👤 PERFIL DE CUENTA</h2>
+            <div style="margin-bottom: 18px;">
+                <img id="modalProfileImg" src="https://via.placeholder.com/100" class="profile-avatar" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                <div>
+                    <input type="text" id="newAvatarUrl" placeholder="URL de nueva foto de perfil" style="margin-bottom: 6px;">
+                    <button onclick="updateAvatar()" style="padding: 8px; font-size: 12px;">Actualizar Foto</button>
+                </div>
+            </div>
+
+            <div class="profile-info-row"><span>Usuario:</span><span id="profUser">-</span></div>
+            <div class="profile-info-row"><span>UID (ID Único):</span><span id="profUid" style="color: var(--accent-gold);">-</span></div>
+            <div class="profile-info-row"><span>Correo:</span><span id="profEmail">-</span></div>
+            <div class="profile-info-row"><span>Documento:</span><span id="profIdentity">-</span></div>
+            <div class="profile-info-row"><span>Rango VIP:</span><span id="profVip">GOLD</span></div>
+            <div class="profile-info-row"><span>Estado Billetera:</span><span id="profFreezeState" style="color: var(--accent-green);">Activa</span></div>
+            <div class="profile-info-row"><span>Probabilidad Juego:</span><span id="profRtp">0.60x (Modo Fácil / Favorable)</span></div>
+
+            <button onclick="closeProfileModal()" style="background: var(--bg-input); margin-top: 15px;">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE JUEGO GENERAL -->
+    <div id="gameModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <h2 id="gameModalTitle">Juego de Casino</h2>
+            
+            <div id="gameArenaContainer" class="game-arena">
+                <!-- Contenido interactivo dinámico -->
+            </div>
+
+            <p id="gameStatusText" style="color: var(--accent-gold); font-size: 13px; font-weight: bold; margin-bottom: 15px; min-height: 20px;"></p>
+
+            <div id="gameControls">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <input type="number" id="gameBetInput" placeholder="Monto de Apuesta COP" value="5000" style="margin:0;">
+                </div>
+                <button id="mainGameActionBtn" onclick="executeCurrentGameAction()">¡APOSTAR Y JUGAR!</button>
+            </div>
+
+            <button onclick="closeGameModal()" style="background: var(--bg-input); margin-top: 10px;">Salir del Juego</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE AJUSTES & ADMINISTRACIÓN -->
+    <div id="settingsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <h2>⚙️ AJUSTES Y SISTEMA</h2>
+            
+            <div class="glass-panel" style="margin-bottom: 15px; text-align: left;">
+                <h4 style="color: var(--accent-gold); margin-bottom: 10px; font-size: 14px;">🔊 Sonido y Preferencias</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+                    <span>Efectos de Audio Vegas</span>
+                    <input type="checkbox" id="soundEffectsToggle" checked style="width: 20px; height: 20px; accent-color: var(--accent-gold);">
+                </div>
+            </div>
+
+            <!-- ACCESO ADMINISTRADOR -->
+            <div id="adminAuthSection" class="glass-panel" style="text-align: left;">
+                <h4 style="color: var(--accent-gold); margin-bottom: 8px; font-size: 14px;">🔐 Panel de Administración</h4>
+                <p style="color: var(--text-gray); font-size: 12px; margin-bottom: 10px;">Ingrese la clave maestra para acceder a las opciones de administración.</p>
+                <input type="password" id="adminPassInput" placeholder="Contraseña de Administrador">
+                <button onclick="verifyAdminPass()">Desbloquear Panel Admin</button>
+            </div>
+
+            <!-- CONTENIDO DE ADMINISTRADOR -->
+            <div id="adminPanelContent" class="admin-box" style="display: none;">
+                <h4>🛡️ 15 COMANDOS REALES DE ADMINISTRADOR</h4>
+                <p style="font-size: 11px; color: var(--text-gray); margin-bottom: 10px;">Ingrese el **UID de 7 dígitos** del usuario objetivo para ejecutar la acción:</p>
+
+                <input type="text" id="adminTargetUid" placeholder="UID Objetivo (Ej: 8492018)">
+
+                <div class="admin-grid">
+                    <div>
+                        <input type="number" id="adminAmount" placeholder="Monto COP" style="margin-bottom: 4px;">
+                        <button onclick="adminAddMoney()" style="background: #16a34a; color: white;">1. Acreditar Saldo</button>
+                    </div>
+                    <div>
+                        <button onclick="adminRemoveMoney()" style="background: #dc2626; color: white; margin-top: 4px;">2. Debitar Saldo</button>
+                    </div>
+                </div>
+
+                <!-- CONFIGURACIÓN DE TIEMPO / CONGELAMIENTO -->
+                <div style="border-top: 1px dashed rgba(241,196,15,0.3); margin-top: 10px; padding-top: 10px;">
+                    <p style="font-size: 11px; color: var(--accent-gold); margin-bottom: 6px;">⏳ Ajustes de Tiempo:</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <input type="number" id="timeDurationInput" placeholder="Duración" style="width: 40%; margin: 0;">
+                        <select id="timeUnitSelect" style="width: 60%; margin: 0;">
+                            <option value="seconds">Segundos</option>
+                            <option value="minutes">Minutos</option>
+                            <option value="hours">Horas</option>
+                            <option value="days">Días</option>
+                            <option value="years">Años</option>
+                            <option value="permanent">Permanente</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="adminBanUser()" style="background: #991b1b; color: white;">3. Banear Cuenta</button>
+                        <button onclick="adminUnbanUser()" style="background: #2563eb; color: white;">4. Desbanear Cuenta</button>
+                    </div>
+                </div>
+
+                <!-- 15 ACCIONES REALES DE CONTROL -->
+                <div style="border-top: 1px dashed rgba(241,196,15,0.3); margin-top: 10px; padding-top: 10px;" class="admin-grid">
+                    <button onclick="adminResetPassword()">5. Reset Clave ("1234")</button>
+                    <button onclick="adminSetExactBalance()">6. Fijar Saldo Exacto</button>
+                    <button onclick="adminChangeVip('HIGH ROLLER VIP')">7. Subir a Rango VIP</button>
+                    <button onclick="adminToggleFreezeWallet()" style="background: #2563eb; color: white;">8. Congelar Billetera 🧊</button>
+                    <button onclick="adminKickUser()">9. Expulsar Sesión (Kick)</button>
+                    <button onclick="adminGiveBonus()">10. Inyectar Bono 100%</button>
+                    <button onclick="adminRigLuck('hard')">11. Modo Difícil (0.10x)</button>
+                    <button onclick="adminRigLuck('normal')">12. Restablecer Probabilidad</button>
+                    <button onclick="adminZeroBalance()">13. Vaciar Saldo ($0)</button>
+                    <button onclick="adminDeleteUser()" style="background: #7f1d1d; color: white;">14. Eliminar Usuario</button>
+                    <button onclick="adminInspectUser()">15. Auditar Ficha Usuario</button>
+                </div>
+            </div>
+
+            <button onclick="closeSettings()" style="background: var(--bg-input); margin-top: 15px;">Cerrar Ajustes</button>
+        </div>
+    </div>
+
+    <!-- MODAL BANEADO -->
+    <div id="bannedModal" class="modal-overlay" style="display: none; z-index: 5000;">
+        <div class="modal-card" style="border-color: var(--accent-red);">
+            <h2 style="color: var(--accent-red);">⛔ CUENTA BANEADA</h2>
+            <p id="bannedReasonText" style="color: var(--text-gray); margin-bottom: 20px; font-size: 13px;"></p>
+            <button onclick="logout()" style="background: var(--accent-red); color: white;">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+    <div id="mainApp" style="display: none;">
+        <header>
+            <div class="logo">⚜️ ARIA GOLD CASINO</div>
+            <div class="header-actions">
+                <div class="user-badge" onclick="openProfileModal()">
+                    <img id="headerAvatar" src="https://via.placeholder.com/34" class="profile-avatar">
+                    <div style="text-align: left;">
+                        <div id="headerUsername" style="color: white; font-weight: bold;">-</div>
+                        <div id="headerUidDisplay" style="font-size: 10px; color: var(--accent-gold);">UID: ------</div>
+                    </div>
+                </div>
+                <button class="wallet-btn" onclick="toggleWalletDrawer()">
+                    💰 <span id="headerBalance">$0 COP</span>
+                </button>
+                <button class="settings-btn" onclick="openSettings()">⚙️</button>
+                <button class="logout-btn" onclick="logout()">🚪</button>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="casino-banner">
+                <div class="banner-info">
+                    <h3>Bienvenido a las Mesas de Juego Aria Gold</h3>
+                    <p>15 juegos exclusivos adaptados para PC y dispositivos móviles.</p>
+                </div>
+                <div style="background: var(--bg-main); border: 1px solid var(--accent-gold); padding: 10px 16px; border-radius: 10px; font-weight: bold; color: var(--accent-gold); font-size: 13px;">
+                    SALA REAL VEGAS 🎰
+                </div>
+            </div>
+
+            <h2 style="color: var(--accent-gold); margin-bottom: 15px; font-size: 18px;">🎰 Catálogo de 15 Juegos Funcionales</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>1. GOLDEN EMPIRE SLOTS</h3>
+                    <p>Tragamonedas clásica de 3 rodillos. Alta probabilidad de Jackpot.</p>
+                    <button class="play-game-btn" onclick="openGame('slots')">Jugar 🎰</button>
+                </div>
+                <div class="product-card">
+                    <h3>2. RULETA EUROPEA</h3>
+                    <p>La rueda gira a toda velocidad. Alta tasa de victorias.</p>
+                    <button class="play-game-btn" onclick="openGame('roulette')">Jugar 🎯</button>
+                </div>
+                <div class="product-card">
+                    <h3>3. CRASH ROCKET</h3>
+                    <p>El cohete sube de multiplicador de manera más estable.</p>
+                    <button class="play-game-btn" onclick="openGame('crash')">Jugar 🚀</button>
+                </div>
+                <div class="product-card">
+                    <h3>4. DADOS VEGAS</h3>
+                    <p>Lanza los dados de cristal. ¡Múltiples combinaciones ganadoras!</p>
+                    <button class="play-game-btn" onclick="openGame('dice')">Jugar 🎲</button>
+                </div>
+                <div class="product-card">
+                    <h3>5. BLACKJACK 21</h3>
+                    <p>Enfréntate al Croupier en vivo. Gran probabilidad a tu favor.</p>
+                    <button class="play-game-btn" onclick="openGame('blackjack')">Jugar 🃏</button>
+                </div>
+                <div class="product-card">
+                    <h3>6. RASPA Y GANA DORADO</h3>
+                    <p>Descubre los 3 símbolos ocultos con premios frecuentes.</p>
+                    <button class="play-game-btn" onclick="openGame('scratch')">Jugar 🎟️</button>
+                </div>
+                <div class="product-card">
+                    <h3>7. MINAS EXTREMAS</h3>
+                    <p>Camino minado de 5x5 con mínima cantidad de minas.</p>
+                    <button class="play-game-btn" onclick="openGame('mines')">Jugar 💣</button>
+                </div>
+                <div class="product-card">
+                    <h3>8. RUEDA FORTUNA VIP</h3>
+                    <p>Enorme rueda giratoria cargada con premios generosos.</p>
+                    <button class="play-game-btn" onclick="openGame('wheel')">Jugar 🎡</button>
+                </div>
+                <div class="product-card">
+                    <h3>9. HI-LO ROYAL</h3>
+                    <p>¿La siguiente carta será mayor o menor? Gran tasa de acierto.</p>
+                    <button class="play-game-btn" onclick="openGame('hilo')">Jugar 📈</button>
+                </div>
+                <div class="product-card">
+                    <h3>10. KENO MILLONARIO</h3>
+                    <p>Elige tu número de la suerte entre 25 casillas dinámicas.</p>
+                    <button class="play-game-btn" onclick="openGame('keno')">Jugar 🔢</button>
+                </div>
+                <div class="product-card">
+                    <h3>11. VIDEO PÓKER ASES</h3>
+                    <p>Mano directa de póker imperial. Mayores combinaciones.</p>
+                    <button class="play-game-btn" onclick="openGame('poker')">Jugar 🎴</button>
+                </div>
+                <div class="product-card">
+                    <h3>12. CARA O CRUZ GOLD</h3>
+                    <p>Moneda de oro giratoria en 3D con ventaja para el jugador.</p>
+                    <button class="play-game-btn" onclick="openGame('coin')">Jugar 🪙</button>
+                </div>
+                <div class="product-card">
+                    <h3>13. PLINKO CASINO</h3>
+                    <p>La bola cae entre los pines directo a los multiplicadores altos.</p>
+                    <button class="play-game-btn" onclick="openGame('plinko')">Jugar ⚪</button>
+                </div>
+                <div class="product-card">
+                    <h3>14. CAJA FUERTE MISTERIO</h3>
+                    <p>Adivina la clave secreta de la caja fuerte del casino fácilmente.</p>
+                    <button class="play-game-btn" onclick="openGame('vault')">Jugar 🔓</button>
+                </div>
+                <div class="product-card">
+                    <h3>15. COFRE DEL FARAÓN</h3>
+                    <p>3 cofres antiguos cargados con jugosos tesoros.</p>
+                    <button class="play-game-btn" onclick="openGame('chest')">Jugar 🧰</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- BILLETERA DRAWER -->
+    <div id="walletDrawerOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2400;" onclick="toggleWalletDrawer()"></div>
+    <div id="walletDrawer" class="wallet-drawer">
+        <div class="wallet-header">
+            <h3>🏛️ Billetera Virtual</h3>
+            <button class="close-drawer" onclick="toggleWalletDrawer()">&times;</button>
+        </div>
+        <div class="wallet-content">
+            <div class="wallet-balance-box">
+                <h4>Saldo Disponible</h4>
+                <span id="drawerBalance">$0 COP</span>
+                <p id="drawerFreezeNotice" style="color: var(--accent-red); font-size: 11px; font-weight: bold; margin-top: 6px; display: none;">
+                    🧊 BILLETERA CONGELADA POR ADMINISTRACIÓN
+                </p>
+            </div>
+            <div class="glass-panel">
+                <h4 style="color: var(--accent-gold); margin-bottom: 10px; font-size: 14px;">💳 Recargar Dinero</h4>
+                <input type="number" id="topUpAmount" placeholder="Monto COP">
+                <button class="topup-btn" onclick="userTopUp()">Recargar</button>
+            </div>
+            <div class="glass-panel">
+                <h4 style="color: var(--accent-gold); margin-bottom: 10px; font-size: 14px;">🏦 Solicitar Retiro</h4>
+                <input type="number" id="withdrawAmount" placeholder="Monto COP">
+                <button class="withdraw-btn" onclick="userWithdraw()">Retirar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO SINTETIZADO WEB AUDIO API (EFECTOS DE SONIDO DE CASINO) -->
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            let toggle = document.getElementById('soundEffectsToggle');
+            if (toggle && !toggle.checked) return;
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'win') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'lose') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'spin') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.05);
+                }
+            } catch(e){}
+        }
+    </script>
+
+    <script>
+        // --- BASE DE DATOS LOCAL Y SESIÓN ---
+        let usersDB = JSON.parse(localStorage.getItem('aria_users_db')) || {};
+        let activeUserUid = localStorage.getItem('aria_active_uid') || null;
+        let isRegisterMode = false;
+        let currentGameType = null;
+        let isGameAnimating = false;
+
+        let currentCardValue = 7;
+        let selectedChestIndex = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            checkUserSession();
+        });
+
+        function saveDB() {
+            localStorage.setItem('aria_users_db', JSON.stringify(usersDB));
+        }
+
+        function showToast(msg) {
+            let container = document.getElementById('toastContainer');
+            let toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
+        }
+
+        function generateUID() {
+            let uid;
+            do {
+                uid = Math.floor(1000000 + Math.random() * 9000000).toString();
+            } while (usersDB[uid]);
+            return uid;
+        }
+
+        // --- VERIFICAR ESTADO Y CONGELAMIENTO EN TIEMPO REAL ---
+        function isWalletFrozen(user) {
+            if (!user.frozenWallet) return false;
+            
+            if (user.frozenUntil === 'permanent') return true;
+            
+            if (user.frozenUntil && new Date().getTime() > user.frozenUntil) {
+                user.frozenWallet = false;
+                user.frozenUntil = null;
+                saveDB();
+                return false;
+            }
+            return true;
+        }
+
+        function checkUserSession() {
+            if (activeUserUid && usersDB[activeUserUid]) {
+                let user = usersDB[activeUserUid];
+
+                if (user.banned) {
+                    if (user.banUntil && user.banUntil !== 'permanent' && new Date().getTime() > user.banUntil) {
+                        user.banned = false;
+                        user.banUntil = null;
+                        saveDB();
+                    } else {
+                        document.getElementById('bannedModal').style.display = 'flex';
+                        let timeMsg = user.banUntil === 'permanent' ? 'Permanentemente' : `hasta ${new Date(user.banUntil).toLocaleString()}`;
+                        document.getElementById('bannedReasonText').innerText = `Tu cuenta (UID: ${user.uid}) ha sido suspendida ${timeMsg}.`;
+                        return;
+                    }
+                }
+
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('bannedModal').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                updateUI();
+            } else {
+                document.getElementById('authModal').style.display = 'flex';
+                document.getElementById('mainApp').style.display = 'none';
+            }
+        }
+
+        function updateUI() {
+            if (!activeUserUid || !usersDB[activeUserUid]) return;
+            let user = usersDB[activeUserUid];
+
+            let frozen = isWalletFrozen(user);
+
+            document.getElementById('headerUsername').innerText = user.username;
+            document.getElementById('headerUidDisplay').innerText = `UID: ${user.uid}`;
+            document.getElementById('headerAvatar').src = user.avatar || 'https://via.placeholder.com/34';
+            
+            let formattedBalance = `$${user.balance.toLocaleString('es-CO')} COP`;
+            document.getElementById('headerBalance').innerText = frozen ? `${formattedBalance} 🧊` : formattedBalance;
+            document.getElementById('drawerBalance').innerText = formattedBalance;
+
+            document.getElementById('drawerFreezeNotice').style.display = frozen ? 'block' : 'none';
+
+            document.getElementById('profUser').innerText = user.username;
+            document.getElementById('profUid').innerText = user.uid;
+            document.getElementById('profEmail').innerText = user.email;
+            document.getElementById('profIdentity').innerText = user.identity;
+            document.getElementById('profVip').innerText = user.vipRank || 'GOLD';
+            
+            let freezeSpan = document.getElementById('profFreezeState');
+            if (frozen) {
+                freezeSpan.innerText = user.frozenUntil === 'permanent' ? '🧊 Congelada (Permanente)' : `🧊 Congelada hasta ${new Date(user.frozenUntil).toLocaleString()}`;
+                freezeSpan.style.color = 'var(--accent-red)';
+            } else {
+                freezeSpan.innerText = 'Activa ✅';
+                freezeSpan.style.color = 'var(--accent-green)';
+            }
+
+            document.getElementById('profRtp').innerText = user.riggedHard ? '0.10x (Modo Ajustado)' : '0.60x (Modo Fácil / Favorable)';
+            document.getElementById('modalProfileImg').src = user.avatar || 'https://via.placeholder.com/100';
+        }
+
+        // --- AUTENTICACIÓN ---
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('authTitle').innerText = isRegisterMode ? '⚜️ REGISTRO DE USUARIO' : '⚜️ INICIAR SESIÓN';
+            document.getElementById('registerFields').style.display = isRegisterMode ? 'block' : 'none';
+            document.getElementById('registerConfirmPassword').style.display = isRegisterMode ? 'block' : 'none';
+            document.getElementById('authSubmitBtn').innerText = isRegisterMode ? 'CREAR CUENTA' : 'INGRESAR';
+            document.getElementById('authToggleBtn').innerText = isRegisterMode ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate aquí';
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            let username = document.getElementById('authUsername').value.trim();
+            let password = document.getElementById('authPassword').value.trim();
+
+            if (isRegisterMode) {
+                let email = document.getElementById('regEmail').value.trim();
+                let identity = document.getElementById('regIdentity').value.trim();
+                let confirmPass = document.getElementById('authConfirmPassword').value.trim();
+
+                if (!email || !identity) return showToast('⚠️ Complete todos los campos.');
+                if (password !== confirmPass) return showToast('❌ Las contraseñas no coinciden.');
+
+                let exists = Object.values(usersDB).some(u => u.username.toLowerCase() === username.toLowerCase());
+                if (exists) return showToast('❌ El nombre de usuario ya existe.');
+
+                let newUid = generateUID();
+                usersDB[newUid] = {
+                    uid: newUid,
+                    username: username,
+                    email: email,
+                    identity: identity,
+                    password: password,
+                    balance: 0, // INICIA SIEMPRE CON 0 PESOS
+                    avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+                    banned: false,
+                    banUntil: null,
+                    vipRank: 'GOLD',
+                    frozenWallet: false,
+                    frozenUntil: null,
+                    riggedHard: false
+                };
+                saveDB();
+                activeUserUid = newUid;
+                localStorage.setItem('aria_active_uid', newUid);
+                showToast(`🎉 Registro exitoso. Tu UID es: ${newUid}`);
+                checkUserSession();
+            } else {
+                let user = Object.values(usersDB).find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+                if (user) {
+                    activeUserUid = user.uid;
+                    localStorage.setItem('aria_active_uid', user.uid);
+                    showToast(`Bienvenido, ${user.username}`);
+                    checkUserSession();
+                } else {
+                    showToast('❌ Credenciales incorrectas.');
+                }
+            }
+        }
+
+        function logout() {
+            activeUserUid = null;
+            localStorage.removeItem('aria_active_uid');
+            document.getElementById('bannedModal').style.display = 'none';
+            checkUserSession();
+            showToast('Sesión cerrada.');
+        }
+
+        function openProfileModal() { document.getElementById('profileModal').style.display = 'flex'; }
+        function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
+
+        function updateAvatar() {
+            let url = document.getElementById('newAvatarUrl').value.trim();
+            if (!url) return;
+            usersDB[activeUserUid].avatar = url;
+            saveDB();
+            updateUI();
+            showToast('Foto actualizada.');
+            document.getElementById('newAvatarUrl').value = '';
+        }
+
+        function toggleWalletDrawer() {
+            let drawer = document.getElementById('walletDrawer');
+            let overlay = document.getElementById('walletDrawerOverlay');
+            let open = drawer.classList.toggle('open');
+            overlay.style.display = open ? 'block' : 'none';
+        }
+
+        function userTopUp() {
+            let u = usersDB[activeUserUid];
+            if (isWalletFrozen(u)) return showToast('🧊 Tu billetera está congelada por el administrador.');
+            let amt = parseInt(document.getElementById('topUpAmount').value);
+            if (!amt || amt <= 0) return showToast('Monto inválido.');
+            u.balance += amt;
+            saveDB();
+            updateUI();
+            showToast(`+ $${amt.toLocaleString()} COP abonados.`);
+            document.getElementById('topUpAmount').value = '';
+        }
+
+        function userWithdraw() {
+            let u = usersDB[activeUserUid];
+            if (isWalletFrozen(u)) return showToast('🧊 Tu billetera está congelada por el administrador.');
+            let amt = parseInt(document.getElementById('withdrawAmount').value);
+            if (!amt || amt <= 0 || amt > u.balance) return showToast('Monto o saldo insuficiente.');
+            u.balance -= amt;
+            saveDB();
+            updateUI();
+            showToast(`Retiro procesado por $${amt.toLocaleString()} COP.`);
+            document.getElementById('withdrawAmount').value = '';
+        }
+
+        // --- SISTEMA INTERACTIVO DE JUEGOS ---
+        function openGame(type) {
+            let u = usersDB[activeUserUid];
+            if (isWalletFrozen(u)) {
+                let timeText = u.frozenUntil === 'permanent' ? 'PERMANENTEMENTE' : `HASTA EL ${new Date(u.frozenUntil).toLocaleString()}`;
+                return alert(`🧊 ACCESO RESTRINGIDO:\n\nTu billetera y acceso a los juegos están CONGELADOS ${timeText}.`);
+            }
+
+            if (isGameAnimating) return;
+            currentGameType = type;
+            document.getElementById('gameModal').style.display = 'flex';
+            document.getElementById('gameStatusText').innerText = 'Realiza tu apuesta e inicia la jugada.';
+            document.getElementById('mainGameActionBtn').disabled = false;
+            
+            let arena = document.getElementById('gameArenaContainer');
+            let title = document.getElementById('gameModalTitle');
+
+            if (type === 'slots') {
+                title.innerText = '🎰 GOLDEN EMPIRE SLOTS';
+                arena.innerHTML = `<div class="slots-box"><div class="slot-reel" id="r1">🍒</div><div class="slot-reel" id="r2">🍋</div><div class="slot-reel" id="r3">💎</div></div>`;
+            } else if (type === 'roulette') {
+                title.innerText = '🎯 RULETA EUROPEA';
+                arena.innerHTML = `<div class="roulette-wheel-box" id="rouletteWheel">36</div>`;
+            } else if (type === 'crash') {
+                title.innerText = '🚀 CRASH ROCKET';
+                arena.innerHTML = `<div class="crash-value" id="crashMult">1.00x</div>`;
+            } else if (type === 'dice') {
+                title.innerText = '🎲 DADOS VEGAS';
+                arena.innerHTML = `<div class="dice-container"><div class="slot-reel" id="d1">⚅</div><div class="slot-reel" id="d2">⚅</div></div>`;
+            } else if (type === 'blackjack') {
+                title.innerText = '🃏 BLACKJACK 21';
+                arena.innerHTML = `<div class="card-hand" id="bjHand"><div class="card-item">🂡</div><div class="card-item">🂮</div></div>`;
+            } else if (type === 'scratch') {
+                title.innerText = '🎟️ RASPA Y GANA';
+                arena.innerHTML = `<div class="slots-box"><div class="slot-reel" id="sc1">❓</div><div class="slot-reel" id="sc2">❓</div><div class="slot-reel" id="sc3">❓</div></div>`;
+            } else if (type === 'mines') {
+                title.innerText = '💣 MINAS EXTREMAS';
+                arena.innerHTML = `<div class="grid-5x5" id="minesGrid"></div>`;
+                setupMinesGrid();
+            } else if (type === 'wheel') {
+                title.innerText = '🎡 RUEDA FORTUNA VIP';
+                arena.innerHTML = `<div class="roulette-wheel-box" id="wheelBox">🎁</div>`;
+            } else if (type === 'hilo') {
+                title.innerText = '📈 HI-LO ROYAL';
+                currentCardValue = Math.floor(Math.random() * 10) + 2;
+                arena.innerHTML = `<div style="text-align:center;"><div class="card-item" id="hiloCard" style="margin: 0 auto;">${currentCardValue}</div></div>`;
+            } else if (type === 'keno') {
+                title.innerText = '🔢 KENO MILLONARIO';
+                arena.innerHTML = `<div class="grid-5x5" id="kenoGrid"></div>`;
+                setupKenoGrid();
+            } else if (type === 'poker') {
+                title.innerText = '🎴 VIDEO PÓKER';
+                arena.innerHTML = `<div class="card-hand" id="pokerHand"><div class="card-item">🂡</div><div class="card-item">🂱</div><div class="card-item">🂾</div><div class="card-item">🃁</div><div class="card-item">🃞</div></div>`;
+            } else if (type === 'coin') {
+                title.innerText = '🪙 CARA O CRUZ GOLD';
+                arena.innerHTML = `<div style="font-size: 50px;" id="coinIcon">🪙</div>`;
+            } else if (type === 'plinko') {
+                title.innerText = '⚪ PLINKO CASINO';
+                arena.innerHTML = `<div style="font-size: 40px;" id="plinkoBall">📍</div>`;
+            } else if (type === 'vault') {
+                title.innerText = '🔓 CAJA FUERTE MISTERIO';
+                arena.innerHTML = `<div style="font-size: 55px;" id="vaultBox">🔒</div>`;
+            } else if (type === 'chest') {
+                title.innerText = '🧰 COFRE DEL FARAÓN';
+                arena.innerHTML = `<div class="chests-container"><div class="chest-item" onclick="selectChest(0)">🧰</div><div class="chest-item" onclick="selectChest(1)">🧰</div><div class="chest-item" onclick="selectChest(2)">🧰</div></div>`;
+                selectedChestIndex = null;
+            }
+        }
+
+        function closeGameModal() {
+            if (isGameAnimating) return showToast('⚠️ Espera a que termine la jugada.');
+            document.getElementById('gameModal').style.display = 'none';
+        }
+
+        function setGameLock(lock) {
+            isGameAnimating = lock;
+            let btn = document.getElementById('mainGameActionBtn');
+            if (btn) btn.disabled = lock;
+        }
+
+        function setupMinesGrid() {
+            let grid = document.getElementById('minesGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            for (let i = 0; i < 25; i++) {
+                let cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.innerText = '❓';
+                cell.onclick = () => {
+                    if (cell.classList.contains('revealed')) return;
+                    cell.classList.add('revealed');
+                    cell.innerText = Math.random() < 0.08 ? '💣' : '💎';
+                };
+                grid.appendChild(cell);
+            }
+        }
+
+        function setupKenoGrid() {
+            let grid = document.getElementById('kenoGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            for (let i = 1; i <= 25; i++) {
+                let cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.innerText = i;
+                cell.onclick = () => {
+                    document.querySelectorAll('#kenoGrid .grid-cell').forEach(c => c.style.borderColor = 'rgba(241,196,15,0.3)');
+                    cell.style.borderColor = '#f1c40f';
+                    cell.setAttribute('data-selected', 'true');
+                };
+                grid.appendChild(cell);
+            }
+        }
+
+        function selectChest(idx) {
+            selectedChestIndex = idx;
+            document.querySelectorAll('.chest-item').forEach((c, i) => {
+                c.style.transform = i === idx ? 'scale(1.25)' : 'scale(1)';
+                c.style.filter = i === idx ? 'drop-shadow(0 0 10px #f1c40f)' : 'none';
+            });
+            showToast(`Cofre #${idx + 1} seleccionado.`);
+        }
+
+        function executeCurrentGameAction() {
+            let u = usersDB[activeUserUid];
+
+            if (isWalletFrozen(u)) {
+                closeGameModal();
+                return alert('🧊 Billetera congelada. Se ha cancelado la jugada.');
+            }
+
+            let bet = parseInt(document.getElementById('gameBetInput').value);
+
+            if (!bet || bet <= 0) return showToast('⚠️ Ingrese un monto de apuesta válido.');
+            if (bet > u.balance) return showToast('❌ Saldo insuficiente para esta apuesta.');
+
+            u.balance -= bet;
+            saveDB();
+            updateUI();
+            setGameLock(true);
+
+            let hard = u.riggedHard;
+            let winChance = hard ? 0.10 : 0.60;
+
+            document.getElementById('gameStatusText').innerText = '🎰 Jugada en progreso...';
+            playSound('spin');
+
+            if (currentGameType === 'slots') {
+                let r1 = document.getElementById('r1');
+                let r2 = document.getElementById('r2');
+                let r3 = document.getElementById('r3');
+                r1.classList.add('spinning'); r2.classList.add('spinning'); r3.classList.add('spinning');
+
+                setTimeout(() => {
+                    r1.classList.remove('spinning'); r2.classList.remove('spinning'); r3.classList.remove('spinning');
+                    let isWin = Math.random() < winChance;
+                    let syms = ['🍒', '🍋', '🔔', '⭐', '7️⃣', '💎'];
+                    
+                    if (isWin) {
+                        let winSym = '💎';
+                        r1.innerText = winSym; r2.innerText = winSym; r3.innerText = winSym;
+                        let winAmt = bet * 5;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡JACKPOT IMPERIAL! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        r1.innerText = syms[Math.floor(Math.random()*syms.length)];
+                        r2.innerText = syms[Math.floor(Math.random()*syms.length)];
+                        r3.innerText = syms[Math.floor(Math.random()*syms.length)];
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = '❌ La casa gana. Inténtalo de nuevo.';
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 2000);
+
+            } else if (currentGameType === 'roulette') {
+                let w = document.getElementById('rouletteWheel');
+                w.classList.add('wheel-fast-spin');
+                setTimeout(() => {
+                    w.classList.remove('wheel-fast-spin');
+                    let isWin = Math.random() < winChance;
+                    let num = isWin ? 7 : Math.floor(Math.random()*36);
+                    w.innerText = num;
+                    if (isWin) {
+                        let winAmt = bet * 4;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡Pleno a la Ruleta! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = `❌ Salió el número ${num}. Has perdido tu apuesta.`;
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 2000);
+
+            } else if (currentGameType === 'crash') {
+                let m = document.getElementById('crashMult');
+                let val = 1.00;
+                let isWin = Math.random() < winChance;
+                let target = isWin ? (2.0 + Math.random() * 2) : (1.05 + Math.random()*0.3);
+
+                let interval = setInterval(() => {
+                    val += 0.08;
+                    m.innerText = val.toFixed(2) + 'x';
+                    if (val >= target) {
+                        clearInterval(interval);
+                        if (isWin) {
+                            let winAmt = Math.floor(bet * target);
+                            u.balance += winAmt;
+                            playSound('win');
+                            document.getElementById('gameStatusText').innerText = `🎉 Retiro con éxito a ${target.toFixed(2)}x. Ganaste $${winAmt.toLocaleString()} COP`;
+                        } else {
+                            m.innerText = '💥 CRASH!';
+                            playSound('lose');
+                            document.getElementById('gameStatusText').innerText = '💥 ¡El cohete explotó antes de tiempo!';
+                        }
+                        saveDB(); updateUI(); setGameLock(false);
+                    }
+                }, 120);
+
+            } else if (currentGameType === 'dice') {
+                let d1 = document.getElementById('d1');
+                let d2 = document.getElementById('d2');
+                d1.classList.add('dice-roll'); d2.classList.add('dice-roll');
+
+                setTimeout(() => {
+                    d1.classList.remove('dice-roll'); d2.classList.remove('dice-roll');
+                    let isWin = Math.random() < winChance;
+                    let dices = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+                    if (isWin) {
+                        d1.innerText = '⚅'; d2.innerText = '⚅';
+                        let winAmt = bet * 6;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡Doble 6 Perfecto! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        d1.innerText = dices[Math.floor(Math.random()*5)];
+                        d2.innerText = dices[Math.floor(Math.random()*5)];
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = '❌ Sumatoria no ganadora.';
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 1800);
+
+            } else if (currentGameType === 'scratch') {
+                let sc1 = document.getElementById('sc1');
+                let sc2 = document.getElementById('sc2');
+                let sc3 = document.getElementById('sc3');
+                setTimeout(() => {
+                    let isWin = Math.random() < winChance;
+                    if (isWin) {
+                        sc1.innerText = '👑'; sc2.innerText = '👑'; sc3.innerText = '👑';
+                        let winAmt = bet * 5;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡3 Coronas Doradas! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        sc1.innerText = '👑'; sc2.innerText = '🍋'; sc3.innerText = '❌';
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = '❌ Tarjeta no premiada.';
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 1200);
+
+            } else if (currentGameType === 'coin') {
+                let coin = document.getElementById('coinIcon');
+                coin.classList.add('coin-flip-anim');
+                setTimeout(() => {
+                    coin.classList.remove('coin-flip-anim');
+                    let isWin = Math.random() < winChance;
+                    if (isWin) {
+                        coin.innerText = '👑';
+                        let winAmt = bet * 2;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡Salió Cara Imperial! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        coin.innerText = '🦅';
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = '❌ Salió Cruz. Gana la casa.';
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 1500);
+
+            } else if (currentGameType === 'chest') {
+                if (selectedChestIndex === null) {
+                    u.balance += bet; saveDB(); updateUI(); setGameLock(false);
+                    return showToast('⚠️ Haz clic en uno de los 3 cofres antes de apostar.');
+                }
+                setTimeout(() => {
+                    let isWin = Math.random() < winChance;
+                    let chests = document.querySelectorAll('.chest-item');
+                    chests.forEach((c, idx) => {
+                        if (idx === selectedChestIndex) {
+                            c.innerText = isWin ? '👑' : '💀';
+                        }
+                    });
+                    if (isWin) {
+                        let winAmt = bet * 4;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡Encontraste el Tesoro del Faraón! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = '💀 Cofre trampa o vacío. Has perdido tu apuesta.';
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 1200);
+
+            } else {
+                setTimeout(() => {
+                    let isWin = Math.random() < winChance;
+                    if (isWin) {
+                        let winAmt = bet * 3;
+                        u.balance += winAmt;
+                        playSound('win');
+                        document.getElementById('gameStatusText').innerText = `🎉 ¡Jugada Exitosa! Ganaste $${winAmt.toLocaleString()} COP`;
+                    } else {
+                        playSound('lose');
+                        document.getElementById('gameStatusText').innerText = '❌ La banca gana esta ronda.';
+                    }
+                    saveDB(); updateUI(); setGameLock(false);
+                }, 1500);
+            }
+        }
+
+        // --- CONFIGURACIÓN Y ADMINISTRACIÓN ---
+        function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
+        function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
+
+        function verifyAdminPass() {
+            let pass = document.getElementById('adminPassInput').value;
+            if (pass === '@1983Mar') {
+                document.getElementById('adminAuthSection').style.display = 'none';
+                document.getElementById('adminPanelContent').style.display = 'block';
+                showToast('🔑 Acceso total de Administrador concedido.');
+            } else {
+                showToast('❌ Contraseña Incorrecta.');
+            }
+        }
+
+        function getTargetUser() {
+            let uid = document.getElementById('adminTargetUid').value.trim();
+            if (!uid || !usersDB[uid]) {
+                showToast('❌ Usuario no encontrado con ese UID.');
+                return null;
+            }
+            return usersDB[uid];
+        }
+
+        function calculateExpirationTimestamp() {
+            let dur = parseInt(document.getElementById('timeDurationInput').value);
+            let unit = document.getElementById('timeUnitSelect').value;
+
+            if (unit === 'permanent') return 'permanent';
+            if (!dur || dur <= 0) dur = 1;
+
+            let mult = 1000;
+            if (unit === 'seconds') mult *= 1;
+            if (unit === 'minutes') mult *= 60;
+            if (unit === 'hours') mult *= 3600;
+            if (unit === 'days') mult *= 86400;
+            if (unit === 'years') mult *= 31536000;
+
+            return new Date().getTime() + (dur * mult);
+        }
+
+        // --- ACCIONES DE ADMINISTRADOR ---
+        function adminAddMoney() {
+            let u = getTargetUser(); let amt = parseInt(document.getElementById('adminAmount').value);
+            if (!u || !amt) return; u.balance += amt; saveDB(); updateUI(); showToast(`1. Acreditados $${amt.toLocaleString()} COP a UID ${u.uid}`);
+        }
+
+        function adminRemoveMoney() {
+            let u = getTargetUser(); let amt = parseInt(document.getElementById('adminAmount').value);
+            if (!u || !amt) return; u.balance = Math.max(0, u.balance - amt); saveDB(); updateUI(); showToast(`2. Debitados $${amt.toLocaleString()} COP a UID ${u.uid}`);
+        }
+
+        function adminBanUser() {
+            let u = getTargetUser(); if (!u) return;
+            u.banned = true;
+            u.banUntil = calculateExpirationTimestamp();
+            saveDB(); showToast(`3. Usuario ${u.username} Baneado.`); checkUserSession();
+        }
+
+        function adminUnbanUser() {
+            let u = getTargetUser(); if (!u) return;
+            u.banned = false; u.banUntil = null; saveDB(); showToast(`4. Cuenta UID ${u.uid} Desbaneada.`);
+        }
+
+        function adminResetPassword() {
+            let u = getTargetUser(); if (!u) return;
+            u.password = "1234"; saveDB(); showToast(`5. Clave de ${u.username} restablecida a: 1234`);
+        }
+
+        function adminSetExactBalance() {
+            let u = getTargetUser(); let amt = parseInt(document.getElementById('adminAmount').value);
+            if (!u || isNaN(amt)) return; u.balance = amt; saveDB(); updateUI(); showToast(`6. Saldo fijado exactamente en $${amt.toLocaleString()} COP`);
+        }
+
+        function adminChangeVip(rank) {
+            let u = getTargetUser(); if (!u) return;
+            u.vipRank = rank || 'HIGH ROLLER VIP'; saveDB(); updateUI(); showToast(`7. Rango VIP de ${u.username} cambiado a ${u.vipRank}`);
+        }
+
+        function adminToggleFreezeWallet() {
+            let u = getTargetUser(); if (!u) return;
+            if (u.frozenWallet) {
+                u.frozenWallet = false;
+                u.frozenUntil = null;
+                showToast(`8. Billetera de ${u.username} DESCONGELADA ✅`);
+            } else {
+                u.frozenWallet = true;
+                u.frozenUntil = calculateExpirationTimestamp();
+                let msgTime = u.frozenUntil === 'permanent' ? 'Permanentemente' : `hasta ${new Date(u.frozenUntil).toLocaleString()}`;
+                showToast(`8. Billetera y juegos de ${u.username} CONGELADOS 🧊 (${msgTime})`);
+            }
+            saveDB(); updateUI();
+        }
+
+        function adminKickUser() {
+            let u = getTargetUser(); if (!u) return;
+            if (u.uid === activeUserUid) logout();
+            else showToast(`9. Cierre de sesión forzado aplicado a UID ${u.uid}`);
+        }
+
+        function adminGiveBonus() {
+            let u = getTargetUser(); if (!u) return;
+            u.balance *= 2; saveDB(); updateUI(); showToast(`10. Bono de duplicación acreditado a ${u.username}`);
+        }
+
+        function adminRigLuck(mode) {
+            let u = getTargetUser(); if (!u) return;
+            u.riggedHard = (mode === 'hard');
+            saveDB(); updateUI(); showToast(`11/12. Dificultad para ${u.username}: ${mode === 'hard' ? 'MODO DIFICIL (0.10x)' : 'FÁCIL (0.60x)'}`);
+        }
+
+        function adminZeroBalance() {
+            let u = getTargetUser(); if (!u) return;
+            u.balance = 0; saveDB(); updateUI(); showToast(`13. Saldo dejado en $0 COP para ${u.username}`);
+        }
+
+        function adminDeleteUser() {
+            let u = getTargetUser(); if (!u) return;
+            delete usersDB[u.uid]; saveDB(); showToast(`14. Usuario UID ${u.uid} eliminado del sistema.`);
+            if (u.uid === activeUserUid) logout();
+        }
+
+        function adminInspectUser() {
+            let u = getTargetUser(); if (!u) return;
+            let freezeStatus = isWalletFrozen(u) ? `CONGELADO 🧊 (${u.frozenUntil === 'permanent' ? 'Permanente' : new Date(u.frozenUntil).toLocaleString()})` : 'ACTIVA ✅';
+            alert(`🔍 15. AUDITORÍA OFICIAL DE CUENTA:\n\n` +
+                  `• Usuario: ${u.username}\n` +
+                  `• UID: ${u.uid}\n` +
+                  `• Correo: ${u.email}\n` +
+                  `• Documento: ${u.identity}\n` +
+                  `• Saldo Actual: $${u.balance.toLocaleString()} COP\n` +
+                  `• Estado Billetera: ${freezeStatus}\n` +
+                  `• Rango VIP: ${u.vipRank}\n` +
+                  `• Modo Difícil: ${u.riggedHard ? 'SÍ (0.10x)' : 'NO (0.60x)'}\n` +
+                  `• Estado Cuenta: ${u.banned ? 'BANEADA ⛔' : 'ACTIVA ✅'}`);
+        }
+    </script>
+</body>
+</html>
